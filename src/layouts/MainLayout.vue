@@ -47,7 +47,8 @@ export default {
       dataHtml: '',
       filteredWebsite: ['aliexpress', 'zalando', 'amazon'],
       removedWebsite: ['google', 'w3', 'schema', 'gstatic', 'twitter'],
-      allWebsite: []
+      allWebsite: [],
+      baseUrl: 'http://api.scraperapi.com?api_key=203bc1297a170cddc24c75b42f44adca&url='
     }
   },
   mounted () {
@@ -60,12 +61,16 @@ export default {
       this.loading = true
       this.allWebsite = []
       this.websiteFound = []
-      this.$axios.get('https://www.google.com/searchbyimage?image_url=' + encodeURIComponent(this.url) + '&btnG=Recherche+par+image&encoded_image=&image_content=&filename=&hl=fr')
+      this.$axios.get(this.baseUrl + 'https://www.google.com/searchbyimage?image_url=' + encodeURIComponent(this.url) + '&btnG=Recherche+par+image&encoded_image=&image_content=&filename=&hl=fr')
         .then(response => {
+          console.log(response)
           this.everSearch = true
           this.searchInHtml(response.data)
         }).catch(error => {
           if (error) {
+            Object.keys(error).forEach(key => {
+              console.log(error[key])
+            })
             this.everSearch = true
             this.loading = false
           }
@@ -100,6 +105,11 @@ export default {
         }
       })
       return arr
+    }
+  },
+  provide () {
+    return {
+      baseUrl: this.baseUrl
     }
   }
 }

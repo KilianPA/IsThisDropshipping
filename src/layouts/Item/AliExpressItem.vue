@@ -24,7 +24,7 @@ export default {
   name: 'AliExpressItem',
   components: { ItemTextLink },
   props: ['website'],
-  inject: [],
+  inject: ['baseUrl'],
   computed: {},
   data () {
     return {
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     getInfo () {
-      this.$axios.get(this.website).then(response => {
+      this.$axios.get(this.baseUrl + this.website).then(response => {
         const scrap = cheerio.load(response.data)
         scrap('img').filter((i, el) => {
           if (el.parent.name === 'a') {
