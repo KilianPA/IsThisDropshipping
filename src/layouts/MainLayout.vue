@@ -48,7 +48,7 @@ export default {
       filteredWebsite: ['aliexpress', 'zalando', 'amazon'],
       removedWebsite: ['google', 'w3', 'schema', 'gstatic', 'twitter'],
       allWebsite: [],
-      baseUrl: 'http://api.scrapestack.com/scrape?access_key=8b578b3d3f896fbecb1c35fe670f4f36&url='
+      baseUrl: 'https://api.proxycrawl.com/?token=GdfcN8XY_aXo46sjiooSPQ&url='
       // baseUrl: 'https://api.scraperapi.com?api_key=203bc1297a170cddc24c75b42f44adca&url='
     }
   },
@@ -62,7 +62,7 @@ export default {
       this.loading = true
       this.allWebsite = []
       this.websiteFound = []
-      this.$axios.get(this.baseUrl + 'https://www.google.com/searchbyimage?image_url=' + encodeURIComponent(this.url) + '&btnG=Recherche+par+image&encoded_image=&image_content=&filename=&hl=fr')
+      this.$axios.get(this.baseUrl + encodeURI('https://www.google.com/searchbyimage?image_url=') + encodeURIComponent(this.url) + '&btnG=Recherche+par+image&encoded_image=&image_content=&filename=&hl=fr')
         .then(response => {
           console.log(response)
           this.everSearch = true
