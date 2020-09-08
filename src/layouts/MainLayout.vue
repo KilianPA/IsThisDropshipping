@@ -48,7 +48,8 @@ export default {
       filteredWebsite: ['aliexpress', 'zalando', 'amazon'],
       removedWebsite: ['google', 'w3', 'schema', 'gstatic', 'twitter'],
       allWebsite: [],
-      baseUrl: 'https://api.scraperapi.com?api_key=203bc1297a170cddc24c75b42f44adca&url='
+      baseUrl: 'http://api.scrapestack.com/scrape?access_key=8b578b3d3f896fbecb1c35fe670f4f36&url='
+      // baseUrl: 'https://api.scraperapi.com?api_key=203bc1297a170cddc24c75b42f44adca&url='
     }
   },
   mounted () {
