@@ -12,7 +12,7 @@
         </template>
         <template v-slot:append>
           <q-icon v-if="url !== ''" name="close" @click="url = ''" class="cursor-pointer" />
-          <q-icon @click.native="imageSearch" class="cursor-pointer" name="search" />
+          <q-icon @click.native="imageSearchPost" class="cursor-pointer" name="search" />
         </template>
       </q-input>
       <q-card v-if="everSearch" class="q-mt-md">
@@ -58,7 +58,7 @@ export default {
     goTo (website) {
       window.open(website, '_blank')
     },
-    imageSearch () {
+    imageSearchGet () {
       this.loading = true
       this.allWebsite = []
       this.websiteFound = []
@@ -72,6 +72,29 @@ export default {
             Object.keys(error).forEach(key => {
               console.log(error[key])
             })
+            this.everSearch = true
+            this.loading = false
+          }
+        })
+    },
+    imageSearchPost () {
+      console.log('ici')
+      this.loading = true
+      this.allWebsite = []
+      this.websiteFound = []
+      const username = 'KilianPA'
+      const apiKey = 'u9koVcycgqsL1u7hNWsu9CBuS'
+      var url = encodeURI('https://www.google.com/searchbyimage?image_url=') + encodeURIComponent(this.url) + '&btnG=Recherche+par+image&encoded_image=&image_content=&filename=&hl=fr'
+      this.$axios.post('http://api.scraping-bot.io/scrape/raw-html',
+        { url: url },
+        { headers: { 'content-type': 'application/json' }, auth: { username: username, password: apiKey } })
+        .then(response => {
+          console.log(response)
+          this.everSearch = true
+          this.searchInHtml(response.data)
+        }).catch(error => {
+          if (error) {
+            console.log(error)
             this.everSearch = true
             this.loading = false
           }
