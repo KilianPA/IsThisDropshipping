@@ -85,7 +85,7 @@ export default {
       const username = 'KilianPA'
       const apiKey = 'u9koVcycgqsL1u7hNWsu9CBuS'
       var url = encodeURI('https://www.google.com/searchbyimage?image_url=') + encodeURIComponent(this.url) + '&btnG=Recherche+par+image&encoded_image=&image_content=&filename=&hl=fr'
-      this.$axios.post('http://api.scraping-bot.io/scrape/raw-html',
+      this.$axios.post('https://api.scraping-bot.io/scrape/raw-html',
         { url: url },
         { headers: { 'content-type': 'application/json' }, auth: { username: username, password: apiKey } })
         .then(response => {
